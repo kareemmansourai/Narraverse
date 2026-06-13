@@ -8,13 +8,13 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
 });
 
-export default function RighttBox() {
+export default function RighttBox({ num1, num2 }) {
   return (
     <div className="flex flex-col gap-10">
-      <div className=" rounded-2xl border border-[rgba(180,160,255,0.25)] bg-[#00000080] py-5 px-10 w-fit h-fit">
+      <div className="rounded-2xl border border-[rgba(180,160,255,0.25)] bg-[#00000080] py-5 px-10 w-fit h-fit">
         <div className="flex items-center gap-6 ">
           <span className="border border-transparent p-1.5 bg-[#6745af] w-7 h-7 rounded-full  flex items-center justify-center">
-            2
+            {num1}
           </span>
           <p className={`${cormorant.className} text-[25px]`}>
             Generated Visuals
@@ -32,7 +32,7 @@ export default function RighttBox() {
           }}
         ></div>
       </div>
-      <BottomBox />
+      <BottomBox num={num2} />
 
       <div className=" mt-[20px] flex justify-center items-center flex-col">
         <p className="text-xs text-white/50 ">

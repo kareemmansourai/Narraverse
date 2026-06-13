@@ -1,7 +1,6 @@
 "use client";
 
 import { Cormorant_Garamond } from "next/font/google";
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,8 +10,6 @@ const cormorant = Cormorant_Garamond({
 });
 
 export default function LeftBox() {
-  const [text, setText] = useState("");
-
   return (
     <div className=" rounded-2xl border border-[rgba(180,160,255,0.25)] bg-[#00000080] py-5 px-10  w-fit h-fit">
       <div className="flex items-center gap-6 justify-center">
@@ -47,27 +44,6 @@ export default function LeftBox() {
         <p className="flex justify-center mt-3 text-sm text-white/70">
           Supports: .txt, .pdf, .docx{" "}
         </p>
-
-        <div className="flex items-center gap-4 my-4">
-          <hr className="flex-1 border-white/70" />
-          <span className="text-white/70 text-sm whitespace-nowrap">
-            or paste your story
-          </span>
-          <hr className="flex-1 border-white/70" />
-        </div>
-      </div>
-
-      <div>
-        <div className="relative">
-          <textarea
-            maxLength={5000}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Paste your story here.."
-            className="w-full h-50 bg-black/50 border border-[rgba(180,160,255,0.25)] rounded-xl p-3 text-white placeholder:text-white/70 resize-none outline-none"
-          />
-        </div>
-        <span className=" text-white/70 text-xs">{text.length}/5000 Words</span>
       </div>
 
       <div className="flex items-center gap-4 my-4">
@@ -83,11 +59,17 @@ export default function LeftBox() {
           <option value="harry-potter" className="bg-[#1a1a2e] text-white/70">
             Harry Potter
           </option>
-          <option value="harry-potter-2" className="bg-[#1a1a2e] text-white/70">
-            Harry Potter
+          <option value="aCOTAR" className="bg-[#1a1a2e] text-white/70">
+            ACOTAR
           </option>
-          <option value="harry-potter-3" className="bg-[#1a1a2e] text-white/70">
-            Harry Potter
+          <option
+            value="folk-of-the-air"
+            className="bg-[#1a1a2e] text-white/70"
+          >
+            Folk of the Air
+          </option>
+          <option value="caraval" className="bg-[#1a1a2e] text-white/70">
+            Caraval
           </option>
         </select>
 

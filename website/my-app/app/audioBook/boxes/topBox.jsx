@@ -1,21 +1,18 @@
 "use client";
 
 import { Cormorant_Garamond } from "next/font/google";
-import { useState } from "react";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-export default function TopBox() {
-  const [text, setText] = useState("");
-
+export default function TopBox({ num }) {
   return (
     <div className=" rounded-2xl border border-[rgba(180,160,255,0.25)] bg-[#00000080] py-5 px-10  w-fit h-fit">
       <div className="flex items-center gap-6 justify-center">
         <span className="border border-transparent p-1.5 bg-[#6745af] w-7 h-7 rounded-full  flex items-center justify-center">
-          1
+          {num}
         </span>
         <p className={`${cormorant.className} text-[25px]`}>
           Your Original Story
@@ -45,27 +42,6 @@ export default function TopBox() {
         <p className="flex justify-center mt-3 text-sm text-white/70">
           Supports: .txt, .pdf, .docx
         </p>
-
-        <div className="flex items-center gap-4 my-4">
-          <hr className="flex-1 border-white/70" />
-          <span className="text-white/70 text-sm whitespace-nowrap">
-            or paste your story
-          </span>
-          <hr className="flex-1 border-white/70" />
-        </div>
-      </div>
-
-      <div>
-        <div className="relative">
-          <textarea
-            maxLength={5000}
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Paste your story here.."
-            className="w-full h-50 bg-black/50 border border-[rgba(180,160,255,0.25)] rounded-xl p-3 text-white placeholder:text-white/70 resize-none outline-none"
-          />
-        </div>
-        <span className=" text-white/70 text-xs">{text.length}/5000 Words</span>
       </div>
     </div>
   );

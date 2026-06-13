@@ -5,13 +5,13 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
 });
 
-export default function RighttBox() {
+export default function RighttBox({ num }) {
   return (
     <div className="relative z-10 flex justify-end gap-5 pb-[100px] pr-16">
       <div className=" rounded-2xl border border-[rgba(180,160,255,0.25)] bg-[#00000080] py-5 px-10 w-fit h-fit">
         <div className="flex items-center gap-6 ">
           <span className="border border-transparent p-1.5 bg-[#6745af] w-7 h-7 rounded-full  flex items-center justify-center">
-            3
+            {num}
           </span>
           <p className={`${cormorant.className} text-[25px]`}>
             Generated Audio

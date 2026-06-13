@@ -39,7 +39,7 @@ export default function Services() {
           descrition="Turn your words into stunning visuals. Generate high-quality, cinematic scenes and character images that bring your story to life instantly."
           button="Try Image Generator"
           reverse={true}
-          href="/visual"
+          href="/visual?from=services"
           image={p2}
         />
 
@@ -49,7 +49,7 @@ export default function Services() {
           descrition="Bring your story to life through AI narration. Convert every chapter into high-quality audio with natural AI voices, cinematic delivery, and seamless chapter-by-chapter generation."
           button="Try Audio Generator"
           reverse={false}
-          href="/audioBook"
+          href="/audioBook?from=services"
           image={p3}
         />
 

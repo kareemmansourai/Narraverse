@@ -5,6 +5,7 @@ import { Roboto } from "next/font/google";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import star from "@/public/star.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -84,7 +85,7 @@ export default function GeneratedBook() {
               "0 0 15px rgba(180, 160, 255, 0.4), 0 0 30px rgba(180, 160, 255, 0.2)",
           }}
         >
-          Generate Visuals
+          <Link href="/visual?from=generatedBook">Generate Visuals</Link>
         </button>
         <button
           className="px-[100px] py-2 rounded-full text-white cursor-pointer"
@@ -96,7 +97,7 @@ export default function GeneratedBook() {
               "0 0 15px rgba(180, 160, 255, 0.4), 0 0 30px rgba(180, 160, 255, 0.2)",
           }}
         >
-          Generate Audio
+          <Link href="/audioBook?from=generatedBook">Generate Audio</Link>
         </button>
       </div>
 
