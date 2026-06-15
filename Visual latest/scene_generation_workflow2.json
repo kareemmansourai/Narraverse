@@ -1,0 +1,304 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "flux-2-klein-base-4b-fp8.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "2": {
+    "inputs": {
+      "clip_name": "qwen_3_4b.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text": "Reference image 1 is the environment.\n\nReference image 2 is Albus Dumbledore.\nPreserve facial structure, beard, spectacles, robes, body proportions.\n\nReference image 3 is Professor McGonagall in tabby cat form.\nPreserve fur pattern and spectacle-like eye markings.\n\nScene:\nDumbledore stands on Privet Drive at midnight holding a silver Put-Outer.\nAs he clicks the device, street lamps extinguish one by one.\n\nComposition:\nWide cinematic street-level shot.\nDumbledore occupies the foreground.\nThe tabby cat sits on a low garden wall in the background.\n\nLighting:\nStreet lamps fading into darkness.\nCool moonlight.\nDeep shadows.\nSlight atmospheric mist.\n\nStyle:\nPhotorealistic fantasy film still.\nNatural skin texture.\nCohesive lighting.\nNo compositing artifacts.",
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "6": {
+    "inputs": {
+      "image": "location_bg_00008_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image - LOCATION"
+    }
+  },
+  "7": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "megapixels": 1,
+      "resolution_steps": 1,
+      "image": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "ImageScaleToTotalPixels",
+    "_meta": {
+      "title": "Scale LOCATION (~1MP)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "image": "08_dumbledore.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image - CHARACTER 1"
+    }
+  },
+  "9": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "megapixels": 1,
+      "resolution_steps": 1,
+      "image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "ImageScaleToTotalPixels",
+    "_meta": {
+      "title": "Scale CHARACTER 1 (~1MP)"
+    }
+  },
+  "10": {
+    "inputs": {
+      "conditioning": [
+        "4",
+        0
+      ],
+      "conditioning_1": [
+        "26",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ],
+      "image_1": [
+        "7",
+        0
+      ],
+      "image_2": [
+        "9",
+        0
+      ],
+      "image_3": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "SAGAMultiReferenceConditioning",
+    "_meta": {
+      "title": "Multi-Reference Conditioning (SAGA)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "image": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "Get Image Size"
+    }
+  },
+  "12": {
+    "inputs": {
+      "steps": 10,
+      "width": [
+        "11",
+        0
+      ],
+      "height": [
+        "11",
+        1
+      ]
+    },
+    "class_type": "Flux2Scheduler",
+    "_meta": {
+      "title": "Flux2Scheduler"
+    }
+  },
+  "13": {
+    "inputs": {
+      "width": [
+        "11",
+        0
+      ],
+      "height": [
+        "11",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyFlux2LatentImage",
+    "_meta": {
+      "title": "Empty Flux 2 Latent"
+    }
+  },
+  "14": {
+    "inputs": {
+      "noise_seed": 363514116426173
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "15": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "16": {
+    "inputs": {
+      "cfg": 1.5,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "10",
+        0
+      ],
+      "negative": [
+        "10",
+        1
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFG Guider"
+    }
+  },
+  "17": {
+    "inputs": {
+      "noise": [
+        "14",
+        0
+      ],
+      "guider": [
+        "16",
+        0
+      ],
+      "sampler": [
+        "15",
+        0
+      ],
+      "sigmas": [
+        "12",
+        0
+      ],
+      "latent_image": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "18": {
+    "inputs": {
+      "samples": [
+        "17",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "19": {
+    "inputs": {
+      "filename_prefix": "Flux2-Klein",
+      "images": [
+        "18",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "20": {
+    "inputs": {
+      "image": "WhatsApp Image 2026-06-15 at 3.39.24 AM.jpeg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image - CHARACTER 2"
+    }
+  },
+  "21": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "megapixels": 1,
+      "resolution_steps": 1,
+      "image": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "ImageScaleToTotalPixels",
+    "_meta": {
+      "title": "Scale CHARACTER 1 (~1MP)"
+    }
+  },
+  "26": {
+    "inputs": {
+      "text": "anime, cartoon, illustration, stylized, modern clothing, extra characters, people watching, crowds, morphing, blended features, multiple limbs, duplicate characters, fused bodies",
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  }
+}
