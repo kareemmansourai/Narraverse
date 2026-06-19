@@ -33,7 +33,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={`${outfit.className} flex justify-between items-center fixed top-0 left-0 right-0 z-50 px-12 transition-all duration-300`}
+      className={`${outfit.className} flex justify-between py-5 items-center fixed top-0 left-0 right-0 z-50 px-12 transition-all duration-300`}
       style={{
         background: scrolled ? "rgba(5, 0, 20, 0.6)" : "transparent",
         backdropFilter: scrolled ? "blur(10px)" : "none",
@@ -51,7 +51,6 @@ export default function Navbar() {
         <p className="uppercase text-2xl">Narraverse</p>
       </div>
 
-      {/* Nav links (only when logged in) */}
       <div>
         {!loading && user && (
           <ul className="flex gap-25">
